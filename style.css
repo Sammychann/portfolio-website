@@ -1,57 +1,46 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 /* =============================================
-   ELEMENT THEMES — CSS Custom Properties
+   THEMES — Dark (Default) & Light Mode
    ============================================= */
 :root {
+  /* Dark Theme (Default) */
   --bg: #050508;
-  --bg-alt: #0a0a10;
-  --text: #f0f0f5;
-  --text-dim: #888898;
-  --text-muted: #55556a;
-  --accent: #06b6d4;
-  --accent-alt: #3b82f6;
-  --accent-glow: rgba(6, 182, 212, 0.18);
-  --border: rgba(255, 255, 255, 0.08);
-  --particle-r: 6;
-  --particle-g: 182;
-  --particle-b: 212;
-}
-
-body[data-element="earth"] {
-  --accent: #10b981;
-  --accent-alt: #f59e0b;
-  --accent-glow: rgba(16, 185, 129, 0.18);
-  --particle-r: 16;
-  --particle-g: 185;
-  --particle-b: 129;
-}
-
-body[data-element="fire"] {
-  --accent: #ef4444;
-  --accent-alt: #f97316;
-  --accent-glow: rgba(239, 68, 68, 0.18);
-  --particle-r: 239;
-  --particle-g: 68;
-  --particle-b: 68;
-}
-
-body[data-element="air"] {
-  --accent: #38bdf8;
-  --accent-alt: #818cf8;
-  --accent-glow: rgba(56, 189, 248, 0.18);
-  --particle-r: 56;
-  --particle-g: 189;
-  --particle-b: 248;
-}
-
-body[data-element="avatar"] {
+  --bg-alt: #0b0b12;
+  --text: #f1f5f9;
+  --text-dim: #94a3b8;
+  --text-muted: #64748b;
   --accent: #00f2fe;
-  --accent-alt: #ffffff;
-  --accent-glow: rgba(0, 242, 254, 0.28);
+  --accent-alt: #3b82f6;
+  --accent-glow: rgba(0, 242, 254, 0.2);
+  --border: rgba(255, 255, 255, 0.08);
+  --card-bg: rgba(255, 255, 255, 0.02);
   --particle-r: 0;
   --particle-g: 242;
   --particle-b: 254;
+  --switcher-bg: rgba(10, 10, 16, 0.75);
+  --switcher-border: rgba(255, 255, 255, 0.12);
+  --node-bg: rgba(10, 10, 16, 0.85);
+}
+
+body[data-theme="light"] {
+  /* Light Theme — Ultra-sleek porcelain / luxury clean */
+  --bg: #f8fafc;
+  --bg-alt: #f1f5f9;
+  --text: #0f172a;
+  --text-dim: #334155;
+  --text-muted: #64748b;
+  --accent: #2563eb; /* Deep Sapphire Blue */
+  --accent-alt: #0284c7;
+  --accent-glow: rgba(37, 99, 235, 0.15);
+  --border: rgba(15, 23, 42, 0.12);
+  --card-bg: rgba(255, 255, 255, 0.7);
+  --particle-r: 30;
+  --particle-g: 41;
+  --particle-b: 59;
+  --switcher-bg: rgba(255, 255, 255, 0.8);
+  --switcher-border: rgba(15, 23, 42, 0.15);
+  --node-bg: rgba(255, 255, 255, 0.9);
 }
 
 /* =============================================
@@ -86,7 +75,7 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: --accent 0.6s ease, --accent-alt 0.6s ease;
+  transition: background 0.5s ease, color 0.5s ease;
 }
 
 a {
@@ -115,7 +104,7 @@ a {
   left: 0;
   width: 36px;
   height: 36px;
-  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  border: 1.5px solid var(--text-dim);
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
@@ -129,7 +118,7 @@ a {
   left: 0;
   width: 5px;
   height: 5px;
-  background: #fff;
+  background: var(--text);
   border-radius: 50%;
   pointer-events: none;
   z-index: 10000;
@@ -143,48 +132,34 @@ body.cursor-hover #cursor-ring {
 }
 
 /* =============================================
-   TOP ELEMENT SWITCHER (Minimalist Header Pill)
+   TOP-RIGHT MOON / SUN THEME TOGGLE BUTTON
    ============================================= */
-.element-switcher-top {
+.theme-toggle-top {
   position: fixed;
-  top: 1.25rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 0.35rem;
-  padding: 0.35rem 0.6rem;
-  background: rgba(8, 8, 14, 0.7);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid var(--border);
-  border-radius: 50px;
-  z-index: 1000;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-}
-
-.elem-btn {
-  width: 32px;
-  height: 32px;
+  top: 1.5rem;
+  right: 2rem;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  border: 1.5px solid transparent;
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--switcher-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--switcher-border);
+  color: var(--text);
   cursor: pointer;
-  font-size: 0.9rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  font-size: 1.2rem;
+  z-index: 1000;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.elem-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
-  transform: scale(1.15);
-}
-
-.elem-btn.active {
+.theme-toggle-top:hover {
+  transform: scale(1.12);
   border-color: var(--accent);
-  background: var(--accent-glow);
-  box-shadow: 0 0 14px var(--accent-glow);
+  box-shadow: 0 0 20px var(--accent-glow);
 }
 
 /* =============================================
@@ -207,7 +182,7 @@ body.cursor-hover #cursor-ring {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--border);
   z-index: 1;
 }
 
@@ -233,7 +208,7 @@ body.cursor-hover #cursor-ring {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--text-muted);
   border: 2px solid var(--bg);
   transition: all 0.3s ease;
 }
@@ -258,7 +233,7 @@ body.cursor-hover #cursor-ring {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--text);
-  background: rgba(10, 10, 16, 0.85);
+  background: var(--node-bg);
   backdrop-filter: blur(8px);
   border: 1px solid var(--border);
   padding: 0.2rem 0.6rem;
@@ -390,7 +365,7 @@ body.cursor-hover #cursor-ring {
 
 .about-text .word {
   display: inline-block;
-  opacity: 0.15;
+  opacity: 0.2;
   transition: opacity 0.3s ease;
 }
 
@@ -445,7 +420,7 @@ body.cursor-hover #cursor-ring {
   top: 12px;
   bottom: 12px;
   width: 2px;
-  background: linear-gradient(to bottom, var(--accent), var(--accent-alt), rgba(255,255,255,0.05));
+  background: linear-gradient(to bottom, var(--accent), var(--accent-alt), var(--border));
   box-shadow: 0 0 10px var(--accent-glow);
 }
 
@@ -479,7 +454,7 @@ body.cursor-hover #cursor-ring {
 }
 
 .work-node-card {
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 1.75rem;
@@ -488,9 +463,9 @@ body.cursor-hover #cursor-ring {
 }
 
 .work-node-card:hover {
-  border-color: rgba(var(--particle-r), var(--particle-g), var(--particle-b), 0.4);
+  border-color: var(--accent);
   transform: translateX(6px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
 .exp-header {
@@ -524,7 +499,7 @@ body.cursor-hover #cursor-ring {
   font-size: 0.8rem;
   color: var(--text-muted);
   letter-spacing: 0.05em;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(0, 0, 0, 0.04);
   border: 1px solid var(--border);
   padding: 0.2rem 0.6rem;
   border-radius: 20px;
@@ -621,7 +596,7 @@ body.cursor-hover #cursor-ring {
   border: 1px solid var(--border);
   border-radius: 50px;
   color: var(--text-dim);
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--card-bg);
 }
 
 .project-link {
@@ -673,7 +648,7 @@ body.cursor-hover #cursor-ring {
   font-size: 1rem;
   color: var(--text-dim);
   padding: 0.45rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid var(--border);
   transition: color 0.2s ease;
 }
 
@@ -874,8 +849,12 @@ body.cursor-hover #cursor-ring {
     grid-template-columns: 1fr;
   }
 
-  .element-switcher-top {
-    top: 0.75rem;
+  .theme-toggle-top {
+    top: 1rem;
+    right: 1rem;
+    width: 38px;
+    height: 38px;
+    font-size: 1rem;
   }
 
   .contact-links {
