@@ -2,7 +2,7 @@
 
 An immersive, award-winning minimalist 3D WebGL portfolio built with **Three.js**, **GSAP ScrollTrigger**, and **Lenis Smooth Scroll**.
 
-🔗 **Live Demo**: [https://portfolio-website-fd1dwdrn0-samihans-projects.vercel.app/](https://portfolio-website-fd1dwdrn0-samihans-projects.vercel.app/)
+🔗 **Live Demo**: [https://portfolio-website-gilt-ten-78.vercel.app/)
 
 ![Vercel](https://img.shields.io/badge/Deployed_on-Vercel-000000?style=for-the-badge&logo=vercel)
 ![Three.js](https://img.shields.io/badge/Three.js-r160+-000000?style=for-the-badge&logo=three.js)
