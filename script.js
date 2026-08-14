@@ -24,41 +24,44 @@
   gsap.ticker.lagSmoothing(0);
 
   // =============================
-  // 2. ELEMENT THEME SWITCHER
+  // 2. DARK / LIGHT THEME TOGGLE
   // =============================
   const body = document.body;
-  const elemBtns = document.querySelectorAll('.elem-btn');
+  const themeToggle = document.getElementById('theme-toggle');
+  const themeIcon = document.getElementById('theme-icon');
 
-  const elementColors = {
-    water: { r: 6, g: 182, b: 212 },
-    earth: { r: 16, g: 185, b: 129 },
-    fire: { r: 239, g: 68, b: 68 },
-    air: { r: 56, g: 189, b: 248 },
-    avatar: { r: 0, g: 242, b: 254 },
+  const themeParticleColors = {
+    dark: { r: 0, g: 242, b: 254 },    // Electric Cyan / Blue Glow
+    light: { r: 30, g: 41, b: 59 }     // Deep Sapphire / Obsidian Navy
   };
 
-  let currentElement = localStorage.getItem('portfolio-element') || 'water';
+  let currentTheme = localStorage.getItem('portfolio-theme') || 'dark';
 
-  function setElement(el) {
-    currentElement = el;
-    body.setAttribute('data-element', el);
-    localStorage.setItem('portfolio-element', el);
-    elemBtns.forEach((btn) => {
-      btn.classList.toggle('active', btn.dataset.element === el);
+  function applyTheme(theme) {
+    currentTheme = theme;
+    body.setAttribute('data-theme', theme);
+    localStorage.setItem('portfolio-theme', theme);
+    if (themeIcon) {
+      themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+    }
+  }
+
+  applyTheme(currentTheme);
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      applyTheme(nextTheme);
     });
   }
 
-  setElement(currentElement);
-
-  elemBtns.forEach((btn) => {
-    btn.addEventListener('click', () => setElement(btn.dataset.element));
-  });
-
-  // Keyboard shortcuts
+  // Keyboard shortcut 'T' or '5' for theme toggle
   window.addEventListener('keydown', (e) => {
     if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
-    const map = { '1': 'water', '2': 'earth', '3': 'fire', '4': 'air', '5': 'avatar' };
-    if (map[e.key]) setElement(map[e.key]);
+    if (e.key === 't' || e.key === 'T' || e.key === '5') {
+      const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      applyTheme(nextTheme);
+    }
   });
 
   // =============================
@@ -90,7 +93,7 @@
       velocities[i3 + 1] = (Math.random() - 0.5) * 0.02;
       velocities[i3 + 2] = (Math.random() - 0.5) * 0.01;
       sizes[i] = Math.random() * 2.5 + 0.5;
-      alphas[i] = Math.random() * 0.5 + 0.2;
+      alphas[i] = Math.random() * 0.5 + 0.25;
     }
 
     const geometry = new THREE.BufferGeometry();
@@ -130,7 +133,7 @@
       }
     `;
 
-    const colors = elementColors[currentElement];
+    const colors = themeParticleColors[currentTheme];
     const material = new THREE.ShaderMaterial({
       vertexShader,
       fragmentShader,
@@ -141,7 +144,7 @@
       },
       transparent: true,
       depthWrite: false,
-      blending: THREE.AdditiveBlending,
+      blending: THREE.NormalBlending,
     });
 
     const particles = new THREE.Points(geometry, material);
@@ -183,15 +186,18 @@
       const elapsed = clock.getElapsedTime();
       material.uniforms.uTime.value = elapsed;
 
-      const ec = elementColors[currentElement];
-      targetColor.r = ec.r / 255;
-      targetColor.g = ec.g / 255;
-      targetColor.b = ec.b / 255;
+      const tc = themeParticleColors[currentTheme];
+      targetColor.r = tc.r / 255;
+      targetColor.g = tc.g / 255;
+      targetColor.b = tc.b / 255;
 
       const uc = material.uniforms.uColor.value;
-      uc.x += (targetColor.r - uc.x) * 0.04;
-      uc.y += (targetColor.g - uc.y) * 0.04;
-      uc.z += (targetColor.b - uc.z) * 0.04;
+      uc.x += (targetColor.r - uc.x) * 0.05;
+      uc.y += (targetColor.g - uc.y) * 0.05;
+      uc.z += (targetColor.b - uc.z) * 0.05;
+
+      // Adjust blending mode dynamically based on theme
+      material.blending = currentTheme === 'dark' ? THREE.AdditiveBlending : THREE.NormalBlending;
 
       camera.position.x += (mouse.x * 8 - camera.position.x) * 0.03;
       camera.position.y += (mouse.y * 5 - camera.position.y) * 0.03;
@@ -258,7 +264,6 @@
         graphLineProgress.style.height = `${self.progress * 100}%`;
       }
 
-      // Active section calculation
       let currentSecId = '';
       sections.forEach((sec) => {
         const top = sec.offsetTop - window.innerHeight * 0.35;
