@@ -24,7 +24,7 @@
 
     <link rel="stylesheet" href="style.css">
 </head>
-<body data-element="water">
+<body data-theme="dark">
 
   <!-- Three.js Canvas -->
   <canvas id="webgl-canvas"></canvas>
@@ -33,14 +33,10 @@
   <div id="cursor-ring"></div>
   <div id="cursor-dot"></div>
 
-  <!-- Top Minimalist Element Switcher -->
-  <div class="element-switcher-top">
-    <button class="elem-btn active" data-element="water" title="Water Element (Press 1)">💧</button>
-    <button class="elem-btn" data-element="earth" title="Earth Element (Press 2)">🪨</button>
-    <button class="elem-btn" data-element="fire" title="Fire Element (Press 3)">🔥</button>
-    <button class="elem-btn" data-element="air" title="Air Element (Press 4)">💨</button>
-    <button class="elem-btn" data-element="avatar" title="Avatar State (Press 5)">⚡</button>
-  </div>
+  <!-- Top-Right Moon / Sun Theme Toggle Button -->
+  <button class="theme-toggle-top" id="theme-toggle" title="Toggle Dark/Light Theme">
+    <span id="theme-icon">🌙</span>
+  </button>
 
   <!-- Side Navigation Graph Bar (Swift Navigation) -->
   <div class="side-nav-graph" id="side-nav-graph">
