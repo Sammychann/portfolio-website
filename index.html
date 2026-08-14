@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samihan Narayankeri — AI Engineer & Full-Stack Developer</title>
+    <meta name="description" content="Portfolio of Samihan Narayankeri — AI Engineer, Full-Stack Developer, IEEE Published Researcher. CGPA 9.37 at VIIT Pune. AI Intern at SailPoint.">
+    <meta property="og:title" content="Samihan Narayankeri — AI Engineer & Full-Stack Developer">
+    <meta property="og:description" content="Immersive 3D portfolio showcasing AI engineering, full-stack development, and published research.">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Three.js -->
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <!-- GSAP + ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-element="water">
+
+  <!-- Three.js Canvas -->
+  <canvas id="webgl-canvas"></canvas>
+
+  <!-- Custom Cursor -->
+  <div id="cursor-ring"></div>
+  <div id="cursor-dot"></div>
+
+  <!-- Top Minimalist Element Switcher -->
+  <div class="element-switcher-top">
+    <button class="elem-btn active" data-element="water" title="Water Element (Press 1)">💧</button>
+    <button class="elem-btn" data-element="earth" title="Earth Element (Press 2)">🪨</button>
+    <button class="elem-btn" data-element="fire" title="Fire Element (Press 3)">🔥</button>
+    <button class="elem-btn" data-element="air" title="Air Element (Press 4)">💨</button>
+    <button class="elem-btn" data-element="avatar" title="Avatar State (Press 5)">⚡</button>
+  </div>
+
+  <!-- Side Navigation Graph Bar (Swift Navigation) -->
+  <div class="side-nav-graph" id="side-nav-graph">
+    <div class="graph-line-bg">
+      <div class="graph-line-progress" id="graph-line-progress"></div>
+    </div>
+    <a href="#hero" class="graph-node active" data-section="hero">
+      <span class="node-dot"></span>
+      <span class="node-label">Home</span>
+    </a>
+    <a href="#about" class="graph-node" data-section="about">
+      <span class="node-dot"></span>
+      <span class="node-label">About</span>
+    </a>
+    <a href="#experience" class="graph-node" data-section="experience">
+      <span class="node-dot"></span>
+      <span class="node-label">Work</span>
+    </a>
+    <a href="#project-1" class="graph-node" data-section="project-1">
+      <span class="node-dot"></span>
+      <span class="node-label">Projects</span>
+    </a>
+    <a href="#skills" class="graph-node" data-section="skills">
+      <span class="node-dot"></span>
+      <span class="node-label">Skills</span>
+    </a>
+    <a href="#achievements" class="graph-node" data-section="achievements">
+      <span class="node-dot"></span>
+      <span class="node-label">Honors</span>
+    </a>
+    <a href="#contact" class="graph-node" data-section="contact">
+      <span class="node-dot"></span>
+      <span class="node-label">Contact</span>
+    </a>
+  </div>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="panel hero" id="hero">
+    <div class="hero-content-wrapper">
+      <div class="hero-label">AI Engineer · Full-Stack Developer · Researcher</div>
+      <h1 class="hero-name">
+        <span class="line"><span class="line-inner">Samihan</span></span>
+        <span class="line"><span class="line-inner accent">Narayankeri</span></span>
+      </h1>
+      <p class="hero-sub">Building intelligent systems at the intersection of AI and software engineering.</p>
+    </div>
+    <div class="scroll-indicator">
+      <div class="scroll-line"></div>
+      <span class="scroll-label">Scroll</span>
+    </div>
+  </section>
+
+  <!-- ==================== ABOUT ==================== -->
+  <section class="panel" id="about">
+    <div class="panel-inner">
+      <p class="about-text" id="about-text">
+        I engineer scalable AI systems, from LLM-powered automation pipelines to high-throughput time-series backends. My work spans predictive machine learning microservices, agentic bug detection tools, and enterprise identity intelligence — published in IEEE conferences and battle-tested in national hackathons.
+      </p>
+      <div class="metrics-row">
+        <div class="metric">
+          <div class="metric-val" data-count="9.37" data-decimals="2">0</div>
+          <div class="metric-lbl">CGPA at VIIT Pune</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val" data-count="2" data-decimals="0">0</div>
+          <div class="metric-lbl">IEEE Publications</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val" data-count="5" data-decimals="0" data-suffix="+">0</div>
+          <div class="metric-lbl">Hackathon Wins</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== EXPERIENCE (VERTICAL WORK GRAPH) ==================== -->
+  <section class="panel" id="experience">
+    <div class="panel-inner exp-container">
+      <div class="section-header" style="margin-bottom: 3rem;">
+        <div class="project-label" style="opacity:1;">Experience Graph</div>
+        <h2 style="font-family:'Outfit',sans-serif; font-size:clamp(2rem,4vw,3.5rem); font-weight:800;">Where I've Worked</h2>
+      </div>
+
+      <!-- Minimalist Vertical Work Graph -->
+      <div class="work-graph-timeline">
+        <div class="work-graph-spine"></div>
+        
+        <!-- SailPoint -->
+        <div class="work-graph-node-item">
+          <div class="work-node-point"></div>
+          <div class="work-node-card">
+            <div class="exp-header">
+              <div>
+                <div class="exp-role">AI Intern</div>
+                <a href="https://www.sailpoint.com/" target="_blank" rel="noopener" class="exp-company">SailPoint ↗</a>
+              </div>
+              <span class="exp-date">July 2026 — Present</span>
+            </div>
+            <p class="exp-desc">Developing enterprise AI agentic workflows and identity security intelligence solutions. Engineering scalable automation pipelines and optimizing identity governance models for enterprise security.</p>
+          </div>
+        </div>
+
+        <!-- Elliot Systems - AI Intern -->
+        <div class="work-graph-node-item">
+          <div class="work-node-point"></div>
+          <div class="work-node-card">
+            <div class="exp-header">
+              <div>
+                <div class="exp-role">AI Intern</div>
+                <a href="https://www.elliotsystems.com/" target="_blank" rel="noopener" class="exp-company">Elliot Systems ↗</a>
+              </div>
+              <span class="exp-date">Feb 2026 — June 2026</span>
+            </div>
+            <p class="exp-desc">Developed AI solutions for industrial automation. Built and evaluated LLM-based pipelines for text summarization, document classification, and workflow augmentation.</p>
+          </div>
+        </div>
+
+        <!-- Elliot Systems - Solutions Intern -->
+        <div class="work-graph-node-item">
+          <div class="work-node-point"></div>
+          <div class="work-node-card">
+            <div class="exp-header">
+              <div>
+                <div class="exp-role">Solutions Intern</div>
+                <a href="https://www.elliotsystems.com/" target="_blank" rel="noopener" class="exp-company">Elliot Systems ↗</a>
+              </div>
+              <span class="exp-date">Aug 2025 — Feb 2026</span>
+            </div>
+            <p class="exp-desc">Architected a normalized schema of 150+ database tables. Engineered a scalable multi-tenant backend (Node.js, TimescaleDB) supporting high-volume time-series queries. Built real-time operational dashboards and analytics.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PROJECTS ==================== -->
+  <section class="panel project-panel" id="project-1">
+    <div class="project-content">
+      <div class="project-label">Featured Project</div>
+      <h2 class="project-name">RFP-Responder</h2>
+      <p class="project-desc">AI-Powered RFP Analysis & Clause Extraction System — parsing, extracting, and evaluating requirements from RFP documents while detecting compliance gaps and bid risks.</p>
+      <ul class="project-highlights">
+        <li>NLP pipelines for automated clause extraction, risk detection, and structured requirement mapping.</li>
+        <li>Scoring and recommendation algorithms to prioritize high-probability bid decisions.</li>
+      </ul>
+      <div class="project-tags">
+        <span class="tag">NLP</span>
+        <span class="tag">Python</span>
+        <span class="tag">LLM Pipelines</span>
+        <span class="tag">Risk Scoring</span>
+      </div>
+      <a href="https://github.com/Sammychann/RFP-Responder" target="_blank" rel="noopener" class="project-link">View on GitHub ↗</a>
+    </div>
+  </section>
+
+  <section class="panel project-panel" id="project-2">
+    <div class="project-content">
+      <div class="project-label">Featured Project</div>
+      <h2 class="project-name">ReAdmit.AI</h2>
+      <p class="project-desc">Patient Readmission Prediction System — a Random Forest ML engine deployed as a Flask microservice, achieving 73.22% accuracy across 101,766 patient records.</p>
+      <ul class="project-highlights">
+        <li>Full-stack architecture: Express.js backend + React frontend for real-time patient risk management.</li>
+        <li>Gemini API with LangChain memory for context-aware recommendation workflows.</li>
+      </ul>
+      <div class="project-tags">
+        <span class="tag">Machine Learning</span>
+        <span class="tag">Flask</span>
+        <span class="tag">React</span>
+        <span class="tag">LangChain</span>
+      </div>
+      <a href="https://github.com/Sammychann/Readmit.Ai" target="_blank" rel="noopener" class="project-link">View on GitHub ↗</a>
+    </div>
+  </section>
+
+  <section class="panel project-panel" id="project-3">
+    <div class="project-content">
+      <div class="project-label">Featured Project</div>
+      <h2 class="project-name">BugHunter</h2>
+      <p class="project-desc">Agentic C++ Bug Detection System — a hybrid approach pairing a curated C++ rule engine with LLM fallback (Groq OSS-120B) for zero-day bug detection.</p>
+      <ul class="project-highlights">
+        <li>Pre-execution error detection via real-time AST parsing, reducing debugging cycles by 60%.</li>
+        <li>Model Context Protocol (MCP) integration for structured documentation retrieval.</li>
+      </ul>
+      <div class="project-tags">
+        <span class="tag">Agentic AI</span>
+        <span class="tag">C++</span>
+        <span class="tag">AST Parsing</span>
+        <span class="tag">MCP</span>
+      </div>
+      <a href="https://github.com/Sammychann/BugHunter-Sam" target="_blank" rel="noopener" class="project-link">View on GitHub ↗</a>
+    </div>
+  </section>
+
+  <!-- ==================== SKILLS ==================== -->
+  <section class="panel" id="skills">
+    <div class="panel-inner">
+      <div style="margin-bottom: 3rem;">
+        <div class="project-label" style="opacity:1;">Technical Stack</div>
+        <h2 style="font-family:'Outfit',sans-serif; font-size:clamp(2rem,4vw,3.5rem); font-weight:800;">Skills & Technologies</h2>
+      </div>
+      <div class="skills-columns">
+        <div class="skill-group">
+          <div class="skill-group-title">Languages</div>
+          <ul class="skill-list">
+            <li>C++</li>
+            <li>Python</li>
+            <li>JavaScript</li>
+            <li>HTML5 / CSS3</li>
+            <li>SQL</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Web & Backend</div>
+          <ul class="skill-list">
+            <li>React.js</li>
+            <li>Node.js</li>
+            <li>Express.js</li>
+            <li>Flask</li>
+            <li>Streamlit</li>
+            <li>REST APIs</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">AI / Machine Learning</div>
+          <ul class="skill-list">
+            <li>Machine Learning</li>
+            <li>LLM Systems</li>
+            <li>Prompt Engineering</li>
+            <li>MCP Protocol</li>
+            <li>RAG Architecture</li>
+            <li>Agentic Workflows</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Databases</div>
+          <ul class="skill-list">
+            <li>MySQL</li>
+            <li>PostgreSQL</li>
+            <li>MongoDB</li>
+            <li>TimescaleDB</li>
+            <li>PostGIS</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">DevOps</div>
+          <ul class="skill-list">
+            <li>AWS</li>
+            <li>Docker</li>
+            <li>Kubernetes</li>
+            <li>Git / GitHub</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Analytics & Tools</div>
+          <ul class="skill-list">
+            <li>Power BI</li>
+            <li>Tableau</li>
+            <li>Matplotlib / Seaborn</li>
+            <li>Plotly</li>
+            <li>Excel</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ACHIEVEMENTS ==================== -->
+  <section class="panel" id="achievements">
+    <div class="panel-inner achieve-list">
+      <div style="margin-bottom: 2.5rem;">
+        <div class="project-label" style="opacity:1;">Honors & Research</div>
+        <h2 style="font-family:'Outfit',sans-serif; font-size:clamp(2rem,4vw,3.5rem); font-weight:800;">Achievements</h2>
+      </div>
+
+      <div class="achieve-item">
+        <div class="achieve-title">Winner — Infineon Agentic AI Hackathon</div>
+        <div class="achieve-sub">1st place for designing an autonomous agentic AI automation system.</div>
+      </div>
+      <div class="achieve-item">
+        <div class="achieve-title">Winner — Vizathon 3.0 (VIIT)</div>
+        <div class="achieve-sub">1st place in national Data Analysis & Interactive Visualization Hackathon.</div>
+      </div>
+      <div class="achieve-item">
+        <div class="achieve-title">2nd Position — Dashboard Derby (MindSpark, COEP)</div>
+        <div class="achieve-sub">Runner-up in COEP MindSpark Data Visualization competition.</div>
+      </div>
+      <div class="achieve-item">
+        <div class="achieve-title">2nd Runner-Up — PICT HackoWarts</div>
+        <div class="achieve-sub">Top 3 finish in PICT software development hackathon.</div>
+      </div>
+      <div class="achieve-item">
+        <div class="achieve-title">Top 6% — IEEE PuneCon 2025</div>
+        <div class="achieve-sub">Peer-reviewed paper accepted and presented at IEEE PuneCon 2025.</div>
+        <a href="https://ieeexplore.ieee.org/document/11378299" target="_blank" rel="noopener" class="achieve-link">View on IEEE Xplore ↗</a>
+      </div>
+      <div class="achieve-item">
+        <div class="achieve-title">Best Paper Award (AI/ML Track) — IEEE CCGE 2026</div>
+        <div class="achieve-sub">Awarded Best Paper for research presented at IEEE CCGE 2026.</div>
+        <a href="https://ieeexplore.ieee.org/document/11581753" target="_blank" rel="noopener" class="achieve-link">View on IEEE Xplore ↗</a>
+      </div>
+
+      <div class="certs-section">
+        <div class="certs-title">Certifications</div>
+        <div class="certs-list">
+          <div class="cert">
+            <span class="cert-org">Udemy</span>
+            Microsoft Power BI for Business Intelligence
+          </div>
+          <div class="cert">
+            <span class="cert-org">IBM</span>
+            Data Analysis with Python
+          </div>
+          <div class="cert">
+            <span class="cert-org">DeepLearning.AI</span>
+            Machine Learning Specialization
+          </div>
+          <div class="cert">
+            <span class="cert-org">Stanford / Coursera</span>
+            Introduction to Statistics
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONTACT ==================== -->
+  <section class="panel contact-panel" id="contact">
+    <div>
+      <h2 class="contact-heading">Let's build something<br><span style="color:var(--accent); transition:color 0.5s ease;">remarkable.</span></h2>
+      <p class="contact-sub">Open for AI Engineering, Software Engineering, and Research Collaboration opportunities.</p>
+      <div class="contact-links">
+        <a href="mailto:narayankeris@gmail.com" class="contact-link">narayankeris@gmail.com</a>
+        <a href="https://www.linkedin.com/in/samihan-narayankeri-4a205328b/" target="_blank" rel="noopener" class="contact-link">LinkedIn</a>
+        <a href="https://github.com/Sammychann" target="_blank" rel="noopener" class="contact-link">GitHub</a>
+        <a href="https://leetcode.com/u/9gqR6rHKlT/" target="_blank" rel="noopener" class="contact-link">LeetCode</a>
+        <a href="https://www.codechef.com/users/night4ry" target="_blank" rel="noopener" class="contact-link">CodeChef</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2026 Samihan Narayankeri. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
